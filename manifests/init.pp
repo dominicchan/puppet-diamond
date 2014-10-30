@@ -81,6 +81,7 @@ class diamond(
   $purge_collectors = false,
   $install_from_pip = false,
 ) {
+  class{'diamond::repo': } ->
   class{'diamond::install': } ->
   class{'diamond::config': } ~>
   class{'diamond::service': } ->
