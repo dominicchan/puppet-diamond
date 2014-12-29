@@ -53,6 +53,20 @@ class diamond::install {
     require => File['/etc/diamond'],
   }
 
+  file { '/usr/share/diamond/collectors/weblogic':
+    ensure => directory,
+    owner => root,
+    group => root,
+    require => Package['diamond'],
+  }
+  
+  file { '/usr/share/diamond/collectors/weblogic/weblogic.py':
+    ensure => file,
+    owner => root,
+    group => root,
+    content => file('diamond/usr/share/diamond/collectors/weblogic/weblogic.py'),
+  }
+
   if $diamond::librato_user and $diamond::librato_apikey {
     ensure_packages(['python-pip'])
     ensure_resource('package', 'librato-metrics', {'ensure' => 'present', 'provider' => pip, 'before' => Package['python-pip']})
@@ -64,3 +78,4 @@ class diamond::install {
   }
 
 }
+
