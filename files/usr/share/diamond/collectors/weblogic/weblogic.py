@@ -17,7 +17,7 @@ class WeblogicCollector(diamond.collector.Collector):
         return config
 
     def collect(self):
-        p = subprocess.Popen([self.config['wsltpath'], self.config['wsltscript']], env={'JAVA_HOME':self.config['java_home']}, stdout=subprocess.PIPE)
+        p = subprocess.Popen([self.config['wlstpath'], self.config['wlstscript']], env={'JAVA_HOME':self.config['java_home']}, stdout=subprocess.PIPE)
         for line in iter(p.stdout.readline,''):
             if re.match("^metric:", line) is not None:
                 label, metric_name, shortname, metric_value = string.split(line.rstrip(),":")
