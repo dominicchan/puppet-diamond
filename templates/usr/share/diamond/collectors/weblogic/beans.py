@@ -1,6 +1,6 @@
 <% if (@wlhost and @wlport and @wluser and @wlpass) -%>
 instance = "t3://<%= @wlhost %>:<%= @wlport %>"
-connect ('<%= wluser %>','<%= wlpass %>',instance)
+connect ('<%= @wluser %>','<%= @wlpass %>',instance)
 serverRuntime()
 
 metrics = [
