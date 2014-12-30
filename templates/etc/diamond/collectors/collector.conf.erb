@@ -5,12 +5,14 @@ enabled=True
 <%   end
    end -%>
 <% if defined?(@sections)
-     @sections.keys.each do |k| -%>
-
-<%= "#{k}" %>
-<%     @sections[k].keys.sort.each do |v| -%>
-<%= "#{v} = #{@sections[k][v]}" %>
-<%     end
+     @sections.each do |s|
+       s.each do |t|
+         if ! t.is_a? String -%>
+<%= "#{t[0]} = #{t[1]}" %>
+<%       else -%>
+<%= "#{t}" %>
+<%       end
+       end   
      end
    end -%>
 
