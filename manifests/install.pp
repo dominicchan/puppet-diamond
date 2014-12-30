@@ -67,13 +67,6 @@ class diamond::install {
     content => file('diamond/usr/share/diamond/collectors/weblogic/weblogic.py'),
   }
 
-  file {'/usr/share/diamond/collectors/weblogic/beans.py':
-    ensure => file,
-    owner => root,
-    group => root,
-    content => template('diamond/usr/share/diamond/collectors/weblogic/beans.py'),
-  }
-
   if $diamond::librato_user and $diamond::librato_apikey {
     ensure_packages(['python-pip'])
     ensure_resource('package', 'librato-metrics', {'ensure' => 'present', 'provider' => pip, 'before' => Package['python-pip']})
